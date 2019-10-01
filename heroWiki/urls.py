@@ -17,15 +17,24 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-
+from heroi import views
 from habilidade.views import HabilidadeViewSet
 from hcategoria.views import CategoriaViewSet
+from heroi.views import HeroiViewSet
+from universo.views import UniversoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'habilidade', HabilidadeViewSet)
+router.register(r'universo', UniversoViewSet)
 router.register(r'categoria', CategoriaViewSet)
+router.register(r'heroi', HeroiViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('', views.index),
+    path('index', views.index),
+    path('herois', views.lista),
+    path('wiki/<int:id>', views.detalhe)
+    
 ]
